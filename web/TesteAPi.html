@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Api</title>
+</head>
+<body>
+    <div id="dados"></div>
+
+    <style>
+        span{
+            display: block;
+            color: black;
+            padding: 7px;
+            font-weight: bold;
+            background-color: aqua;
+            font-size: 20px;
+        }
+        strong{ background-color: blue; color: white; padding: 7px; font-size: 20px;}
+        p{background-color: blueviolet; padding: 7px; color: white; font-size: 20px;}
+        .row{ display: flex; align-items: center; justify-content: center;}
+    </style>
+
+    <script defer>
+        var url = "http://localhost:3000/tb_login"
+        var linha = document.querySelector("#dados");
+        console.log(linha)
+
+            fetch(url, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then( data => {
+                console.log(data);
+
+                 data.forEach(item => {
+                    var id = document.createElement("span");
+                    var email = document.createElement("p");
+                    var senha = document.createElement("strong");
+
+                    id.textContent = item.id;
+                    email.textContent = item.email;
+                    senha.textContent = item.senha;
+
+                     /**Criando uma div*/
+                    var div = document.createElement('div');
+                    div.setAttribute("class", "row");
+                    div.appendChild(id);
+                    div.appendChild(email);
+                    div.appendChild(senha);
+
+                    // linha.appendChild(id, email)
+                    linha.append(div)
+                });
+                
+            })
+    </script>
+</body>
+</html>

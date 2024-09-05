@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 01</title>
+</head>
+<body>
+    <p id="categorias"> </p>
+
+    <div class="form-container">
+        <h2>Cadastro de Produto</h2>
+    <script>
+        var url = "http://localhost:3000/categoria"
+
+            fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Usuários:', data);
+                data.forEach(element => {
+                    var option = document.createElement("option");
+                    option.text = element.name;
+                    option.value = element.id;
+                    document.querySelector("#categorias").appendChild(option);
+                });
+            })
+            .catch(error => {
+            console.error('Erro ao buscar usuários:', error);
+            });
+    </script>
+</body>
+</html>
